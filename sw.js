@@ -42,15 +42,16 @@ self.addEventListener('fetch', event => {
 });
 
 self.addEventListener('push', function(event) {
-    const data = event.data ? event.data.json() : {};
-    
-    const options = {
-      body: data.body || 'Nueva notificación desde la PWA',
-      icon: '/images/des.jpg',
-      badge: '/images/des.jpg'
-    };
-  
-    event.waitUntil(
-      self.registration.showNotification(data.title || 'Notificación PWA', options)
-    );
-  });
+  const data = event.data ? event.data.json() : {};
+  console.log('Datos recibidos en push event:', data);
+
+  const options = {
+    body: data.body || 'Nueva notificación desde la PWA',
+    icon: '/images/des.jpg',
+    badge: '/images/des.jpg'
+  };
+
+  event.waitUntil(
+    self.registration.showNotification(data.title || 'Notificación PWA', options)
+  );
+});
